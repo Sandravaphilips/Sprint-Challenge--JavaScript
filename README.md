@@ -30,13 +30,86 @@ Edit this document to include your answers after each question. Make sure to lea
 
 1. Describe the biggest difference between `.forEach` & `.map`.
 
+.forEach mutates an array while .map returns a new array. That means that .forEach changes that original array and returns undefined while map returns a new array without changing the original array.
+
 2. What is the difference between a function and a method?
+
+A function is a block of code that can be called by invoked by its name and which may be passed data to operate on and which may return a value. A method is like a function, but is internal to a class or object, and is called with the name of the object or class preceeding it.
 
 3. What is closure?
 
+Closure is a combination of a function and the outer function(s) in which it was declared.This concept allows function a access to variables in outer function b.
+
 4. Describe the four rules of the 'this' keyword.
 
+Window Binding: the value of "this" will be on the window
+Implicit Binding: "this" creates an instance of a property of a object.
+New Binding: "this" creates an instance of the initial constructor. But "new" is used instead.
+Explicit Binding: occurs when call() or apply() is used.
+
+// code example for Window Binding
+var topLevelVariable = 5;
+console.log(window.topLevelVariable);
+
+// code example for Implicit Binding
+const myObj = {
+    name: "Sandrava",
+    age: 34,
+    print: function() {
+        return `My name is ${this.name} and I'm ${this.age} years old.`
+    }
+}
+
+// code example for New Binding
+function Person(name, age) {
+    this.myName = name;
+    this.myAge = age;
+    this.myStomach = [];
+}
+
+const newConstructor = new Person('Sandra', 76);
+
+// code example for Explicit Binding
+function randomExample (gaga) {
+    console.log(`${this.name} loves ${gaga}`);
+    return this;
+}
+
+randomExample.call(myObj, 'banana');
+
 5. Why do we need super() in an extended class?
+
+super() is like sugar that helps call the parent class with its parameters passsed into the child class. For example:
+class CuboidMaker {
+    constructor(length, width, height) {
+    this.length = length;
+    this.width = width;
+    this.height = height;
+    }
+
+    volume() {
+        return this.length*this.width*this.height;
+    }
+
+    surfaceArea() {
+        return 2 * (this.length * this.width + this.length * this.height + this.width * this.height);
+    }
+}
+
+class CubeMaker extends CuboidMaker {
+    constructor(length, width, height) {
+        super(length, width, height);
+    }
+
+    volume() {
+        return this.length**3;
+    }
+
+    surfaceArea() {
+        return 6*(this.length**2);
+    }
+}
+super in CubeMaker calls CuboidMaker passing it its parameters. So there'll be no need to declare this.length, this.width and this.height
 
 ## Project Set up
 
